@@ -1,0 +1,27 @@
+{
+  "name": "rocket-forms-vue",
+  "version": "0.1.0",
+  "description": "Rocket Forms for Vue 2",
+  "main": "rocketforms.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianrothmann/RocketFormsVue.git"
+  },
+  "keywords": [
+    "rocket",
+    "vue"
+  ],
+  "author": "Ian Rothmann",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ianrothmann/RocketFormsVue/issues"
+  },
+  "homepage": "https://github.com/ianrothmann/RocketFormsVue#readme",
+  "devDependencies": {
+    "debounce": "^1.0.0",
+    "rocketvueappframework" : "^0.2.0"
+  }
+}
