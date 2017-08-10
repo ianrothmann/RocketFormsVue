@@ -14,6 +14,7 @@ export default {
             const classes=[
                 's-grid-cell',
                 createClass('xs',def.options.xs || 12),
+                'mb-0','pb-0'
             ];
 
             if(isset('sm')){
@@ -46,7 +47,7 @@ export default {
             }
 
 
-           return classes; 
+           return classes;
         }
     }
 }
