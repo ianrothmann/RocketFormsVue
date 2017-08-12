@@ -14,6 +14,10 @@
             value : {},
             saveButtonText : String,
             createButtonText : String,
+            cancelButtonText : {
+               type : String,
+               default : 'Cancel'
+            },
             manipulationDefinition : Object,
             preloadedData : Object
         },
@@ -70,7 +74,7 @@
                         value : this.formData,
                         id : this.id,
                         submitButton:this.isEditMode?this.saveButtonText || 'Save':this.createButtonText ||'Create',
-                        cancelButton:'Cancel',
+                        cancelButton:this.cancelButtonText,
                         loading : this.loading
                     },
                     scopedSlots : this.$scopedSlots,
