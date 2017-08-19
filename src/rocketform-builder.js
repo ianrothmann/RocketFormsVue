@@ -1,73 +1,8 @@
+class RocketFormRenderableItem{
 
-class RocketTest{
-
-
-    constructor(){
-
-    }
-
-    setName(v){
-        this.name=v;
-        return this;
-    }
-
-    setSurname(v){
-        this.surname=v;
-        return this;
-    }
-
-    log(){
-        console.log(this);
-    }
-
-
-}
-
-class RocketFormField{
-
-    constructor(type,name,label){
-        this.type=type;
-        this.name=name;
-        this.label=label;
-        this.validation='required';
-        this.options={};
-    }
-
-    withName(val){
-      this.name=val;
+    onlyShowWhen(closure){
+      this.show=closure;
       return this;
-    }
-
-    withLabel(val){
-        this.label=val;
-        return this;
-    }
-
-    withOption(key,value){
-        console.log(this.options);
-        this.options[key]=value;
-    }
-
-    //Validation
-
-    withoutValidation(){
-        this.validation='';
-        return this;
-    }
-
-    withValidation(veeValidators){
-        this.validation=veeValidators;
-        return this;
-    }
-
-    withValidationDelay(ms){
-        this.withOption('data-vv-delay',ms);
-        return this;
-    }
-
-    withValidationLabel(val){
-        this.withOption('data-vv-as',val);
-        return this;
     }
 
     //Layout classes
@@ -121,14 +56,74 @@ class RocketFormField{
         return this;
     }
 
+}
 
+class RocketFormSlot extends RocketFormRenderableItem{
+
+    constructor(name){
+        super();
+        this.type='scoped-slot';
+        this.name=name;
+    }
+}
+
+class RocketFormField extends RocketFormRenderableItem{
+
+    constructor(type,name,label){
+        super();
+        this.type=type;
+        this.name=name;
+        this.label=label;
+        this.validation='required';
+        this.options={};
+    }
+
+    withName(val){
+      this.name=val;
+      return this;
+    }
+
+    withLabel(val){
+        this.label=val;
+        return this;
+    }
+
+    withOption(key,value){
+        this.options[key]=value;
+    }
+
+    withBinding(key,value){
+        this.bindings[key]=value;
+    }
+
+    //Validation
+
+    withoutValidation(){
+        this.validation='';
+        return this;
+    }
+
+    withValidation(veeValidators){
+        this.validation=veeValidators;
+        return this;
+    }
+
+    withValidationDelay(ms){
+        this.withOption('data-vv-delay',ms);
+        return this;
+    }
+
+    withValidationLabel(val){
+        this.withOption('data-vv-as',val);
+        return this;
+    }
 }
 
 
-class RocketFormTextField extends RocketFormField{
+class RocketFormTextAbstractField extends RocketFormField{
 
-    constructor(name,label){
-        super('text',name,label);
+    constructor(type,name,label){
+        super(type,name,label);
     }
 
     withHint(val){
@@ -150,6 +145,16 @@ class RocketFormTextField extends RocketFormField{
     withIconAppended(val){
         this.withOption('append-icon',val);
         return this;
+    }
+
+
+
+}
+
+class RocketFormTextField extends RocketFormTextAbstractField{
+
+    constructor(name,label){
+        super('text',name,label);
     }
 
     withPrefix(val){
@@ -176,10 +181,85 @@ class RocketFormTextField extends RocketFormField{
         this.withOption('rows',rows);
         return this;
     }
+}
+
+class RocketFormDateField extends RocketFormTextAbstractField{
+
+    constructor(name,label){
+        super('date',name,label);
+    }
+
+    allowBefore(fieldName){
+        this.withBinding('allowBefore',fieldName);
+        return this;
+    }
+
+    allowAfter(fieldName){
+        this.withBinding('allowAfter',fieldName);
+        return this;
+    }
+}
+
+
+class RocketFormTimeField extends RocketFormTextAbstractField{
+
+    constructor(name,label){
+        super('time',name,label);
+    }
 
 }
 
-class RocketFormSelectField extends RocketFormField{
+
+class RocketFormDateTimeField extends RocketFormTextAbstractField{
+
+    constructor(name,dateLabel,timeLabel){
+        super('datetime',name,dateLabel);
+        this.dateLabel=dateLabel;
+        this.timeLabel=timeLabel;
+    }
+
+    allowBeforeDate(date){
+        this.withOption('allowBefore',date);
+        return this;
+    }
+
+    allowedDates(dates){
+        this.withOption('allowedDates',dates);
+        return this;
+    }
+
+    allowAfterDate(date){
+        this.withOption('allowAfter',date);
+        return this;
+    }
+
+    bindToAllowBefore(fieldName){
+        this.withBinding('allowBefore',fieldName);
+        return this;
+    }
+
+    bindToAllowAfter(fieldName){
+        this.withBinding('allowAfter',fieldName);
+        return this;
+    }
+}
+
+
+
+class RocketFormBoolField extends RocketFormField{
+
+    constructor(name,label){
+        super('boolean',name,label);
+    }
+
+    makeCheckbox(){
+        this.withOption('checkbox',true);
+        return this;
+    }
+
+}
+
+class RocketFormSelectField extends RocketFormTextAbstractField{
 
     constructor(type,name,label){
         super(type,name,label);
@@ -208,6 +288,8 @@ class RocketFormSingleOptionField extends RocketFormSelectField{
 
 }
 
+
+
 class RocketFormMultiOptionField extends RocketFormSelectField{
 
     constructor(name,label){
@@ -220,6 +302,11 @@ class RocketFormFileAbstractField extends RocketFormField{
 
     constructor(type,name,label){
         super(type,name,label);
+    }
+
+    to(url){
+        this.url=url;
+        return this;
     }
 
 }
@@ -256,6 +343,24 @@ class RocketFormFilesOptionField extends RocketFormFileAbstractField{
 
 }
 
+class RocketFormSection extends RocketFormRenderableItem{
+    constructor(title){
+        super('section');
+        this.type='section';
+        this.title=title;
+    }
+
+    withInstructions(instructions){
+        this.instructions=instructions;
+        return this;
+    }
+
+    withFields(fields){
+        this.inputs=fields;
+        return this;
+    }
+}
+
 const rocketFormBuilder={
     text(name, label){
         return new RocketFormTextField(name,label);
@@ -272,18 +377,39 @@ const rocketFormBuilder={
     multiOption(name, label){
         return new RocketFormMultiOptionField(name,label);
     },
-    file(name, label){
+    file(name, label='File'){
         return new RocketFormFileOptionField(name,label);
     },
-    files(name, label){
+    files(name, label='Files'){
         return new RocketFormFilesOptionField(name,label);
     },
-    image(name, label){
+    image(name, label='Image'){
         return new RocketFormImageOptionField(name,label);
     },
-    images(name, label){
+    images(name, label='Images'){
         return new RocketFormImagesOptionField(name,label);
     },
+    check(name, label){
+        return new RocketFormBoolField(name,label).makeCheckbox();
+    },
+    bool(name, label){
+        return new RocketFormBoolField(name,label);
+    },
+    date(name, label='Date'){
+        return new RocketFormDateField(name,label);
+    },
+    time(name, label='Time'){
+        return new RocketFormTimeField(name,label);
+    },
+    dateTime(name, dateLabel='Date',timeLabel='Time'){
+        return new RocketFormBoolField(name,dateLabel,timeLabel);
+    },
+    section(title){
+        return new RocketFormSection(title);
+    },
+    slot(name){
+        return new RocketFormSlot(name);
+    }
 };
 
 
@@ -292,6 +418,6 @@ export const RocketFormBuilder = {};
 
 RocketFormBuilder.install = function (Vue, options) {
 
-    Vue.prototype.$rf = rocketFormBuilder;
+    Vue.prototype.$rf = {builder:rocketFormBuilder};
 
 };

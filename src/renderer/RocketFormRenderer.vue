@@ -184,11 +184,11 @@
             }
         },
         render(h){
-          let children=[];
-          for(let item of this.definition){
-              children.push(this.validatedRender(h,item));
-          }
-          children.push(this.renderButton(h));
+            let children=[];
+            for(let item of this.definition){
+                children.push(this.validatedRender(h,item));
+            }
+            children.push(this.renderButton(h));
 
           return h('s-grid',{},children);
         }

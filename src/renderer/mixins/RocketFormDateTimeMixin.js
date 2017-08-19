@@ -6,6 +6,7 @@ export default {
             props.label=def.label;
             props.name=def.name;
             props.noMargins=true;
+            props.menu=true;
             props.value=this.formData[def.name];
             this.addOptionalHint(props,def);
             this.processBindings(props,def,data);
@@ -31,6 +32,7 @@ export default {
             props.label=def.label;
             props.name=def.name;
             props.noMargins=true;
+            props.menu=true;
             props.value=this.formData[def.name];
             this.addOptionalHint(props,def);
             this.processBindings(props,def,data);
@@ -55,6 +57,7 @@ export default {
             props.dateLabel=def.dateLabel;
             props.timeLabel=def.timeLabel;
             props.name=def.name;
+            props.menu=true;
             props.noMargins=true;
             props.value=this.formData[def.name];
             this.addOptionalHint(props,def);
