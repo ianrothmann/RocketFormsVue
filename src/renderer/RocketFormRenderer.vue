@@ -6,6 +6,7 @@
     import BooleanMixin from './mixins/RocketFormBooleanMixin';
     import UploadMixin from './mixins/RocketFormUploadMixin';
     import DateTimeMixin from './mixins/RocketFormDateTimeMixin';
+    import LocationMixin from './mixins/RocketFormLocationMixin';
     import ScopedSlotMixin from './mixins/RocketFormScopedSlotMixin';
 
     export default{
@@ -24,7 +25,7 @@
             }
         },
         $validates: true,
-        mixins : [SGridMixin,InputMixin,SingleOptionMixin,MultiOptionMixin,BooleanMixin,UploadMixin,DateTimeMixin,ScopedSlotMixin],
+        mixins : [SGridMixin,InputMixin,SingleOptionMixin,MultiOptionMixin,BooleanMixin,UploadMixin,DateTimeMixin,ScopedSlotMixin,LocationMixin],
         data(){
            return {
                formData : {},
@@ -35,6 +36,7 @@
             this.syncFormData();
         },
         mounted(){
+
            this.innerSubmitButton=this.submitButton;
            this.$watch('submitButton', function () {
                this.innerSubmitButton=this.submitButton;
@@ -116,6 +118,8 @@
                     return children;
                 }else if(item.type==='text'){
                     return this.renderTextInput(h,item,this.formData);
+                }else if(item.type==='location'){
+                    return this.renderLocationInput(h,item,this.formData);
                 }else if(item.type==='single-option'){
                     return this.renderSingleOption(h,item,this.formData);
                 }else if(item.type==='multi-option'){

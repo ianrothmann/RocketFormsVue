@@ -141,6 +141,16 @@ export default {
             }else if(field.dataType==='datetime'){
                 rField['dateLabel']=field.dateLabel;
                 rField['timeLabel']=field.timeLabel;
+            }else if(field.dataType==='location'){
+                console.log(field);
+                if(field.centerLat&&field.centerLng){
+                    rField['options']={
+                        center : {
+                            lat:field.centerLat,
+                            lng:field.centerLng
+                        }
+                    }
+                }
             }else if(field.dataType==='currency'){
                 rField['options']={
                     prefix : field.currencySymbol

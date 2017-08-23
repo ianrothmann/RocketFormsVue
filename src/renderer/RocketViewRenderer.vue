@@ -51,6 +51,31 @@
                     'class':this.getSGridClasses(def)
                 },[el])
             },
+            renderLocationInput(h,def,data){
+                const props=def.options;
+                props.label=def.label;
+                delete props['value'];
+                let el;
+                try{
+                    props['value']=JSON.parse(data[def.name]);
+                    props['mode']='view';
+                    props['center']=props['value'];
+                    el=h('rw-map',{
+                        props,
+                    },[]);
+
+                }catch(e){
+                    console.error('Invalid JSON: '+data[def.name]);
+                    props['value']='Location not set';
+                    el=h('rw-label',{
+                        props,
+                    },[]);
+                }
+                return h('div',{
+                    'class':this.getSGridClasses(def)
+                },[el])
+
+            },
             renderBooleanInput(h,def,data){
                 const props=def.options;
                 props.label=def.label;
@@ -190,6 +215,8 @@
                     return children;
                 }else if(item.type==='text'){
                     return this.renderTextInput(h,item,this.value);
+                }else if(item.type==='location'){
+                    return this.renderLocationInput(h,item,this.value);
                 }else if(item.type==='single-option'){
                     return this.renderSingleOption(h,item,this.value);
                 }else if(item.type==='multi-option'){
