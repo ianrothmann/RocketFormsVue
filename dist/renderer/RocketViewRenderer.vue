@@ -59,7 +59,6 @@
                 try{
                     props['value']=JSON.parse(data[def.name]);
                     props['mode']='view';
-                    props['center']=props['value'];
                     el=h('rw-map',{
                         props,
                     },[]);

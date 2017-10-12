@@ -36,9 +36,9 @@ export default {
         },
         submitData(data){
             if(this.isEditMode){
-                this.saveRecord(data);
+                return this.saveRecord(data);
             }else{
-                this.createRecord(data);
+                return this.createRecord(data);
             }
         },
         saveRecord(data){

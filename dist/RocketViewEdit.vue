@@ -79,17 +79,14 @@
                     }
                 };
 
-                if(this.backButtonHint){
+                data['slot']='activator';
+                let backBtn=h('v-btn',data,[h('v-icon',{},'chevron_left')]);
 
-                    data.directives=[
-                        {
-                            name : 'tooltip',
-                            value : {html:this.backButtonHint},
-                            arg:'bottom'
-                        }
-                    ];
+                if(this.backButtonHint){
+                    backBtn=h('v-tooltip',{props:{bottom:true}},[backBtn,h('span',{},this.backButtonHint)]);
+
                 }
-                return h('v-btn',data,[h('v-icon',{},'chevron_left')]);
+                return backBtn;
             },
             renderTitle(h){
                return h('v-card-title',{

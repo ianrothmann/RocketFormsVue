@@ -16,6 +16,9 @@ export default {
             return this.$http.post(this.url, command).then((response)=>{
                 this.loading=false;
                 return response.body;
+            }).catch((err)=>{
+                console.error(err);
+                this.loading=false;
             });
         }
     },

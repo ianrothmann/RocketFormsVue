@@ -1,12 +1,12 @@
 export default {
     methods : {
         renderSingleOption(h,def,data){
-            if(def.items.length > 2){
+            return this.renderSelect(h,def,data);//TODO: Decide about radio buttons in rocket form
+            /*if(def.items.length >2){
                 return this.renderSelect(h,def,data);
             }else{
                 return this.renderRadio(h,def,data);
-            }
-
+            }*/
         },
         renderSelect(h,def,data){
             const props=def.options;
@@ -39,7 +39,7 @@ export default {
                 });
             }
 
-        },
+        }/*,
         renderRadio(h,def,data){
             const props=def.options;
             props.label=def.label;
@@ -52,7 +52,7 @@ export default {
                 radios.push(h('rw-radio',{
                    props : {
                        label : item[def.valuecol],
-                       trueValue : item[def.idcol]
+                       value : item[def.idcol]
                    }
                 }));
             }
@@ -72,6 +72,6 @@ export default {
                     }
                 }
             },radios);
-        }
+        }*/
     }
 }

@@ -8,6 +8,7 @@
     import DateTimeMixin from './mixins/RocketFormDateTimeMixin';
     import LocationMixin from './mixins/RocketFormLocationMixin';
     import ScopedSlotMixin from './mixins/RocketFormScopedSlotMixin';
+    import RichTextMixin from './mixins/RocketFormRichTextMixin';
 
     export default{
         props : {
@@ -25,7 +26,7 @@
             }
         },
         $validates: true,
-        mixins : [SGridMixin,InputMixin,SingleOptionMixin,MultiOptionMixin,BooleanMixin,UploadMixin,DateTimeMixin,ScopedSlotMixin,LocationMixin],
+        mixins : [SGridMixin,InputMixin,SingleOptionMixin,MultiOptionMixin,BooleanMixin,UploadMixin,DateTimeMixin,ScopedSlotMixin,LocationMixin,RichTextMixin],
         data(){
            return {
                formData : {},
@@ -48,7 +49,7 @@
 
            this.$watch('value', function () {
                this.syncFormData();
-               this.$validator.clean();
+               this.$validator.reset();
            }, {deep:true});
 
            RocketEventHub.$on('validate',(id)=>{
@@ -57,22 +58,25 @@
              }
            });
 
-            this.$validator.clean();
+            this.$validator.reset();
         },
         methods : {
             validate(){
 
-                this.$validator.validateAll().then(()=>{
-                    this.emitValue('valid');
+                this.$validator.validateAll().then((valid)=>{
+                    if(valid)
+                        this.emitValue('valid');
+                    else{
+                        let val = {
+                            data : {},
+                            errors : null
+                        };
+                        Object.assign(val.data,this.formData);
+                        val.errors=this.verrors;
+                        this.$emit('invalid',val);
+                    }
                 }).catch((err)=>{
                     console.error(err);
-                    let val = {
-                        data : {},
-                        errors : null
-                    };
-                    Object.assign(val.data,this.formData);
-                    val.errors=this.verrors;
-                    this.$emit('invalid',val);
                 });
             },
             emitValue(event='input'){
@@ -118,6 +122,8 @@
                     return children;
                 }else if(item.type==='text'){
                     return this.renderTextInput(h,item,this.formData);
+                }else if(item.type==='richtext'){
+                    return this.renderRichtextInput(h,item,this.formData);
                 }else if(item.type==='location'){
                     return this.renderLocationInput(h,item,this.formData);
                 }else if(item.type==='single-option'){

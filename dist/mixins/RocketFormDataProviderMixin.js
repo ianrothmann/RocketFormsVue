@@ -24,6 +24,9 @@ exports.default = {
             return this.$http.post(this.url, command).then(function (response) {
                 _this.loading = false;
                 return response.body;
+            }).catch(function (err) {
+                console.error(err);
+                _this.loading = false;
             });
         }
     },

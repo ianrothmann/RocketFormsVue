@@ -246,14 +246,12 @@ exports.default = {
                     }
                 }
             } else if (field.dataType === 'richtext') {
-                rField['options'] = {
-                    multiline: true
-                };
+                rField['options'] = {};
             } else if (field.dataType === 'datetime') {
                 rField['dateLabel'] = field.dateLabel;
                 rField['timeLabel'] = field.timeLabel;
             } else if (field.dataType === 'location') {
-                console.log(field);
+
                 if (field.centerLat && field.centerLng) {
                     rField['options'] = {
                         center: {
@@ -300,8 +298,6 @@ exports.default = {
             } else if (dataType === 'multiselect') {
                 return 'multi-option';
             } else if (dataType === 'longtext') {
-                return 'text';
-            } else if (dataType === 'richtext') {
                 return 'text';
             } else if (dataType === 'int' || dataType === 'decimal' || dataType === 'currency') {
                 return 'text';
