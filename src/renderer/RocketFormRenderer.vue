@@ -126,7 +126,7 @@
                     return this.renderRichtextInput(h,item,this.formData);
                 }else if(item.type==='location'){
                     return this.renderLocationInput(h,item,this.formData);
-                }else if(item.type==='single-option'){
+                }else if(item.type==='single-option'||item.type==='enum'){
                     return this.renderSingleOption(h,item,this.formData);
                 }else if(item.type==='multi-option'){
                     return this.renderMultiOption(h,item,this.formData);

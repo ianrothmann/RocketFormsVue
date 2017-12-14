@@ -34,7 +34,6 @@
            this.id=RocketFormEventBus.getUniqueID();
         },
         mounted(){
-
             if(this.viewDefinition&&this.preloadedData){
                 this.createRocketFormDefinition(this.viewDefinition);
                 this.formData=this.prepareIncomingData(this.preloadedData);
@@ -60,6 +59,7 @@
 
         },
          render(h){
+
              let children=[
                 h('rocket-view-renderer',{
                     props : {

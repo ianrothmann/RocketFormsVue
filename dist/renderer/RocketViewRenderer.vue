@@ -89,7 +89,7 @@
                         value='Yes';
                     }
 
-                }else if(value==false||value===0){
+                }else if(value==false||value==null||value===0){ //TODO: Test for null values? False is not the same as null
                     if(props.falseDisplayValue){
                         value=props.falseDisplayValue;
                     }else{
@@ -143,9 +143,12 @@
                 delete props['value'];
 
                 let value=null;
-                if(data[def.name]&&data[def.name]!=''){
+                if(data[def.name]&&data[def.name]!==''&&data[def.name]!==null){
                    value=this.valueLookup(def.items,data[def.name],def.idcol,def.valuecol);
+                }else{
+                    value=this.valueLookup(def.items,0,def.idcol,def.valuecol);//TODO: 0 not the same as null
                 }
+
 
                 const el=h('rw-label',{
                     props,
@@ -216,7 +219,7 @@
                     return this.renderTextInput(h,item,this.value);
                 }else if(item.type==='location'){
                     return this.renderLocationInput(h,item,this.value);
-                }else if(item.type==='single-option'){
+                }else if(item.type==='single-option'||item.type==='enum'){
                     return this.renderSingleOption(h,item,this.value);
                 }else if(item.type==='multi-option'){
                     return this.renderMultiOption(h,item,this.value);

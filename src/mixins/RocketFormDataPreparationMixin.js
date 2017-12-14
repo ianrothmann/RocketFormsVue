@@ -43,7 +43,12 @@ export default {
                 if(field.dataType==='file'||field.dataType==='image'){
                     data[fieldId]=[data[fieldId]];
                 }else if(field.dataType==='date'){
-                    data[fieldId]=Vue.filter('rdate')(data[fieldId],'dbdate');
+                    if(typeof data[fieldId] === 'object' && data[fieldId].date){
+                        data[fieldId]=Vue.filter('rdate')(data[fieldId].date,'dbdate');
+                    }
+                    else
+                        data[fieldId]=Vue.filter('rdate')(data[fieldId],'dbdate');
+
                 }else if(field.dataType==='time'){
                     data[fieldId]=Vue.filter('rdate')(data[fieldId],'time');
                 }else if(field.dataType==='datetime'){

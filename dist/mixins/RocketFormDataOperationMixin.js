@@ -34,6 +34,7 @@ exports.default = {
                     command: 'get',
                     id: this.value
                 }).then(function (data) {
+
                     if (prepareData) _this2.formData = _this2.prepareIncomingData(data);else return data;
                 });
             }

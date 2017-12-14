@@ -26,6 +26,7 @@ export default {
                     command : 'get',
                     id : this.value
                 }).then((data)=>{
+
                     if(prepareData)
                         this.formData=this.prepareIncomingData(data);
                     else
