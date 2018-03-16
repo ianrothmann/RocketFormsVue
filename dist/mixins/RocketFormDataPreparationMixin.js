@@ -78,7 +78,7 @@ exports.default = {
                 if (field.dataType === 'file' || field.dataType === 'image') {
                     data[fieldId] = [data[fieldId]];
                 } else if (field.dataType === 'date') {
-                    if (_typeof(data[fieldId]) === 'object' && data[fieldId].date) {
+                    if (data[fieldId] !== null && _typeof(data[fieldId]) === 'object' && data[fieldId].date) {
                         data[fieldId] = Vue.filter('rdate')(data[fieldId].date, 'dbdate');
                     } else data[fieldId] = Vue.filter('rdate')(data[fieldId], 'dbdate');
                 } else if (field.dataType === 'time') {

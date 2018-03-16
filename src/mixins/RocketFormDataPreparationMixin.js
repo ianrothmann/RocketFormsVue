@@ -43,7 +43,7 @@ export default {
                 if(field.dataType==='file'||field.dataType==='image'){
                     data[fieldId]=[data[fieldId]];
                 }else if(field.dataType==='date'){
-                    if(typeof data[fieldId] === 'object' && data[fieldId].date){
+                    if(data[fieldId]!== null && typeof data[fieldId] === 'object' && data[fieldId].date){
                         data[fieldId]=Vue.filter('rdate')(data[fieldId].date,'dbdate');
                     }
                     else
