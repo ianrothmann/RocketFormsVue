@@ -42,7 +42,6 @@ export default {
                 directives : [
                     this.veeValidateDirective(def)
                 ],
-
                 on : {
                     input : (val)=>{
                         this.formData[def.name]=val;

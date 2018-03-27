@@ -116,6 +116,7 @@
                 delete props['value'];
                 props['value']=data[def.name];
                 props['date']=def.type;
+
                 const el=h('rw-label',{
                     props,
                 },[]);

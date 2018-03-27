@@ -46,7 +46,6 @@ exports.default = {
                 props: props,
                 attrs: this.veeValidateAttrs(def),
                 directives: [this.veeValidateDirective(def)],
-
                 on: {
                     input: function input(val) {
                         _this2.formData[def.name] = val;

@@ -57,14 +57,15 @@
                      h('v-btn',{
                          props:{
                              error:true,
-                             loading:this.loading
+                             loading:this.loading,
+                             color:'error'
                          },
                          on:{
                              click : ()=>{
                                  this.deleteRecord();
                              }
                      }},'Yes'),
-                     h('v-btn',{props:{secondary:true},on:{
+                     h('v-btn',{props:{color:'secondary'},on:{
                          click : ()=>{
                              this.showDialog=false;
                              this.$emit('cancel',this.value);
@@ -83,7 +84,8 @@
             return h('v-dialog',{
                 props : {
                     value : this.showDialog,
-                    persistent:true
+                    persistent:true,
+                    width : '40%'
                 },
                 on : {
 
