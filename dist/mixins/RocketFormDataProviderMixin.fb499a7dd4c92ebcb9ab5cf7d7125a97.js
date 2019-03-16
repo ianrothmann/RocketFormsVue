@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={props:{url:{required:!0,type:String}},data:function(){return{loading:!1}},methods:{dataProvider:function(t){var e=this;return this.loading=!0,this.$http.post(this.url,t).then(function(t){return e.loading=!1,t.body}).catch(function(t){e.loading=!1})}},mounted:function(){}};

@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={methods:{renderScopedSlot:function(e,t,s){var r=this.$scopedSlots[t.name](this.formData);return e("div",{class:this.getSGridClasses(t)},r)}}};
