@@ -14,8 +14,8 @@ export default {
             props.name=def.name;
             props.items=def.items;
             if(def.items.length > 0){
-                if(def.items.length > 10){
-                    props.search=true;
+                if(def.items.length > 10) {
+                    props.search = true;
                 }
                 props.itemValue=def.idcol;
                 props.itemText=def.valuecol;

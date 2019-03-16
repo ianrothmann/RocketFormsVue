@@ -50,7 +50,7 @@ exports.default = {
              props.name=def.name;
              props.primary=true;
              props.value=this.formData[def.name];
-               const radios=[];
+              const radios=[];
              for(let item of def.items){
                  radios.push(h('rw-radio',{
                     props : {
@@ -59,8 +59,8 @@ exports.default = {
                     }
                  }));
              }
-               this.processBindings(props,def,data);
-               return h('rw-radio-group',{
+              this.processBindings(props,def,data);
+              return h('rw-radio-group',{
                  props,
                  'class':this.getSGridClasses(def),
                  attrs : this.veeValidateAttrs(def),

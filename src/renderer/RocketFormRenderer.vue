@@ -161,9 +161,9 @@
             renderButton(h){
                 if(this.innerSubmitButton&&this.definition.length>0){
                     let buttons=[];
-                    buttons.push(h('rw-btn',{
+                    buttons.push(h('v-btn',{
                         props:{
-                            primary:true,
+                            color:'primary',
                             disabled : this.loading
                         },
                         on : {
@@ -174,9 +174,9 @@
                     },this.innerSubmitButton));
 
                     if(this.cancelButton){
-                        buttons.push(h('rw-btn',{
+                        buttons.push(h('v-btn',{
                             props:{
-                                secondary:true,
+                                color:'secondary',
                                 disabled : this.loading
                             },
                             on : {
