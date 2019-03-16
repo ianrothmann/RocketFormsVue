@@ -1,1 +1,101 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={methods:{addOptionalHint:function(t,i){t.hasOwnProperty("hint")||(!i.hasOwnProperty("validation")||-1!==i.validation.indexOf("required"))&&i.hasOwnProperty("validation")||(t.hint="Optional",t["persistent-hint"]=!0)},veeValidateDirective:function(t){return t.validation?{name:"validate",value:t.validation,expression:"'"+t.validation+"'"}:{}},veeValidateAttrs:function(t){var i={"data-vv-as":t.label},e=!0,a=!1,n=void 0;try{for(var r,o=Object.keys(t.options)[Symbol.iterator]();!(e=(r=o.next()).done);e=!0){var s=r.value;s.startsWith("data-vv-")&&(i[s]=t.options[s])}}catch(t){a=!0,n=t}finally{try{!e&&o.return&&o.return()}finally{if(a)throw n}}return i},processBindings:function(t,i,e){if(i.bindings){var a=!0,n=!1,r=void 0;try{for(var o,s=Object.keys(i.bindings)[Symbol.iterator]();!(a=(o=s.next()).done);a=!0){var l=o.value;t[l]=e[i.bindings[l]]}}catch(t){n=!0,r=t}finally{try{!a&&s.return&&s.return()}finally{if(n)throw r}}}},renderTextInput:function(t,i,e){var a=this,n=i.options;return n.label=i.label,n.name=i.name,n.value=this.formData[i.name],this.addOptionalHint(n,i),this.processBindings(n,i,e),t("rw-input",{props:n,attrs:this.veeValidateAttrs(i),class:this.getSGridClasses(i),directives:[this.veeValidateDirective(i)],on:{input:function(t){a.formData[i.name]=t}}})}}};
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    methods: {
+        addOptionalHint: function addOptionalHint(props, def) {
+            if (!props.hasOwnProperty('hint') && (def.hasOwnProperty('validation') && def.validation.indexOf('required') === -1 || !def.hasOwnProperty('validation'))) {
+                props['hint'] = 'Optional';
+                props['persistent-hint'] = true;
+            }
+        },
+        veeValidateDirective: function veeValidateDirective(def) {
+            if (def.validation) return { name: 'validate', value: def.validation, expression: "'" + def.validation + "'" };else return {};
+        },
+        veeValidateAttrs: function veeValidateAttrs(def) {
+            var attrs = {
+                'data-vv-as': def.label
+            };
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.keys(def.options)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var key = _step.value;
+
+                    if (key.startsWith('data-vv-')) {
+                        attrs[key] = def.options[key];
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return attrs;
+        },
+        processBindings: function processBindings(props, def, data) {
+            if (def.bindings) {
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = Object.keys(def.bindings)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var key = _step2.value;
+
+                        props[key] = data[def.bindings[key]];
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+            }
+        },
+        renderTextInput: function renderTextInput(h, def, data) {
+            var _this = this;
+
+            var props = def.options;
+            props.label = def.label;
+            props.name = def.name;
+            props.value = this.formData[def.name];
+            this.addOptionalHint(props, def);
+            this.processBindings(props, def, data);
+
+            return h('rw-input', {
+                props: props,
+                attrs: this.veeValidateAttrs(def),
+                'class': this.getSGridClasses(def),
+                directives: [this.veeValidateDirective(def)],
+                on: {
+                    input: function input(val) {
+                        _this.formData[def.name] = val;
+                    }
+                }
+            });
+        }
+    }
+};

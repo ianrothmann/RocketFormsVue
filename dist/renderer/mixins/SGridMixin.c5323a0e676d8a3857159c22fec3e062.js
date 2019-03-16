@@ -1,1 +1,53 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={methods:{getSGridClasses:function(s){function o(o){return void 0!==s.options[o]&&s.options[o]}function t(s,o){return"s-grid-cell-"+s+"-"+o}function e(s,o){return"s-grid-cell-offset-"+s+"-"+o}var f=["s-grid-cell",t("xs",s.options.xs||12),"mb-0","pb-0"];return o("sm")&&f.push(t("sm",s.options.sm)),o("md")&&f.push(t("md",s.options.md)),o("lg")&&f.push(t("lg",s.options.lg)),o("xl")&&f.push(t("xl",s.options.xl)),o("offsetXs")&&f.push(e("sm",s.options.offsetXs)),o("offsetSm")&&f.push(e("sm",s.options.offsetSm)),o("offsetMd")&&f.push(e("md",s.options.offsetMd)),o("offsetLg")&&f.push(e("lg",s.options.offsetLg)),o("offsetXl")&&f.push(e("xl",s.options.offsetXl)),f}}};
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    methods: {
+        getSGridClasses: function getSGridClasses(def) {
+            function isset(val) {
+                return def.options[val] !== undefined && def.options[val];
+            }
+
+            function createClass(breakpoint, cols) {
+                return 's-grid-cell-' + breakpoint + '-' + cols;
+            }
+            function createOffsetClass(breakpoint, cols) {
+                return 's-grid-cell-offset-' + breakpoint + '-' + cols;
+            }
+            var classes = ['s-grid-cell', createClass('xs', def.options.xs || 12), 'mb-0', 'pb-0'];
+
+            if (isset('sm')) {
+                classes.push(createClass('sm', def.options.sm));
+            }
+            if (isset('md')) {
+                classes.push(createClass('md', def.options.md));
+            }
+            if (isset('lg')) {
+                classes.push(createClass('lg', def.options.lg));
+            }
+            if (isset('xl')) {
+                classes.push(createClass('xl', def.options.xl));
+            }
+
+            if (isset('offsetXs')) {
+                classes.push(createOffsetClass('sm', def.options.offsetXs));
+            }
+            if (isset('offsetSm')) {
+                classes.push(createOffsetClass('sm', def.options.offsetSm));
+            }
+            if (isset('offsetMd')) {
+                classes.push(createOffsetClass('md', def.options.offsetMd));
+            }
+            if (isset('offsetLg')) {
+                classes.push(createOffsetClass('lg', def.options.offsetLg));
+            }
+            if (isset('offsetXl')) {
+                classes.push(createOffsetClass('xl', def.options.offsetXl));
+            }
+
+            return classes;
+        }
+    }
+};

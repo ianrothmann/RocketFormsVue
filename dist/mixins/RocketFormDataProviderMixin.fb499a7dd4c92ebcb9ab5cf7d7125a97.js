@@ -1,1 +1,34 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={props:{url:{required:!0,type:String}},data:function(){return{loading:!1}},methods:{dataProvider:function(t){var e=this;return this.loading=!0,this.$http.post(this.url,t).then(function(t){return e.loading=!1,t.body}).catch(function(t){e.loading=!1})}},mounted:function(){}};
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    props: {
+        url: {
+            required: true,
+            type: String
+        }
+    },
+    data: function data() {
+        return {
+            loading: false
+        };
+    },
+
+    methods: {
+        dataProvider: function dataProvider(command) {
+            var _this = this;
+
+            this.loading = true;
+            return this.$http.post(this.url, command).then(function (response) {
+                _this.loading = false;
+                return response.body;
+            }).catch(function (err) {
+                console.error(err);
+                _this.loading = false;
+            });
+        }
+    },
+    mounted: function mounted() {}
+};

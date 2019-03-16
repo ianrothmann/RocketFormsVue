@@ -1,1 +1,79 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={methods:{renderSingleOption:function(e,t,i){return this.renderSelect(e,t,i)},renderSelect:function(e,t,i){var s=this,n=t.options;if(n.label=t.label,n.name=t.name,n.items=t.items,t.items.length>0)return t.items.length>10&&(n.search=!0),n.itemValue=t.idcol,n.itemText=t.valuecol,n.value=this.formData[t.name],this.addOptionalHint(n,t),this.processBindings(n,t,i),e("rw-select",{props:n,class:this.getSGridClasses(t),attrs:this.veeValidateAttrs(t),directives:[this.veeValidateDirective(t)],on:{input:function(e){s.formData[t.name]=e}}})}}};
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    methods: {
+        renderSingleOption: function renderSingleOption(h, def, data) {
+            return this.renderSelect(h, def, data); //TODO: Decide about radio buttons in rocket form
+            /*if(def.items.length >2){
+                return this.renderSelect(h,def,data);
+            }else{
+                return this.renderRadio(h,def,data);
+            }*/
+        },
+        renderSelect: function renderSelect(h, def, data) {
+            var _this = this;
+
+            var props = def.options;
+            props.label = def.label;
+            props.name = def.name;
+            props.items = def.items;
+            if (def.items.length > 0) {
+                if (def.items.length > 10) {
+                    props.search = true;
+                }
+                props.itemValue = def.idcol;
+                props.itemText = def.valuecol;
+                props.value = this.formData[def.name];
+
+                this.addOptionalHint(props, def);
+                this.processBindings(props, def, data);
+
+                return h('rw-select', {
+                    props: props,
+                    'class': this.getSGridClasses(def),
+                    attrs: this.veeValidateAttrs(def),
+                    directives: [this.veeValidateDirective(def)],
+                    on: {
+                        input: function input(val) {
+                            _this.formData[def.name] = val;
+                        }
+                    }
+                });
+            }
+        } /*,
+          renderRadio(h,def,data){
+             const props=def.options;
+             props.label=def.label;
+             props.name=def.name;
+             props.primary=true;
+             props.value=this.formData[def.name];
+              const radios=[];
+             for(let item of def.items){
+                 radios.push(h('rw-radio',{
+                    props : {
+                        label : item[def.valuecol],
+                        value : item[def.idcol]
+                    }
+                 }));
+             }
+              this.processBindings(props,def,data);
+              return h('rw-radio-group',{
+                 props,
+                 'class':this.getSGridClasses(def),
+                 attrs : this.veeValidateAttrs(def),
+                 directives : [
+                     this.veeValidateDirective(def)
+                 ],
+                 on : {
+                     input : (val)=>{
+                         this.formData[def.name]=val;
+                     }
+                 }
+             },radios);
+          }*/
+
+    }
+};

@@ -1,1 +1,44 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={methods:{renderMultiOption:function(e,t,i){return this.renderMultiSelect(e,t,i)},renderMultiSelect:function(e,t,i){var s=this,r=t.options;if(r.label=t.label,r.name=t.name,r.items=t.items,t.items.length>0)return t.items.length>10&&(r.search=!0),r.multi=!0,r.itemValue=t.idcol,r.itemText=t.valuecol,r.value=this.formData[t.name],this.addOptionalHint(r,t),this.processBindings(r,t,i),e("rw-select",{props:r,class:this.getSGridClasses(t),attrs:this.veeValidateAttrs(t),directives:[this.veeValidateDirective(t)],on:{input:function(e){s.formData[t.name]=e}}})}}};
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    methods: {
+        renderMultiOption: function renderMultiOption(h, def, data) {
+            return this.renderMultiSelect(h, def, data);
+        },
+        renderMultiSelect: function renderMultiSelect(h, def, data) {
+            var _this = this;
+
+            var props = def.options;
+            props.label = def.label;
+            props.name = def.name;
+            props.items = def.items;
+            if (def.items.length > 0) {
+                if (def.items.length > 10) {
+                    props.search = true;
+                }
+                props.multi = true;
+                props.itemValue = def.idcol;
+                props.itemText = def.valuecol;
+                props.value = this.formData[def.name];
+
+                this.addOptionalHint(props, def);
+                this.processBindings(props, def, data);
+
+                return h('rw-select', {
+                    props: props,
+                    'class': this.getSGridClasses(def),
+                    attrs: this.veeValidateAttrs(def),
+                    directives: [this.veeValidateDirective(def)],
+                    on: {
+                        input: function input(val) {
+                            _this.formData[def.name] = val;
+                        }
+                    }
+                });
+            }
+        }
+    }
+};

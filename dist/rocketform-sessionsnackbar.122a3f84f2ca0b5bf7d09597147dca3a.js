@@ -1,1 +1,22 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.rocketFormSnackbarMixin=void 0;var _rocketforms=require("./rocketforms"),rocketFormSnackbarMixin=exports.rocketFormSnackbarMixin={created:function(){var r=this;_rocketforms.RocketFormEventBus.$on("errorMessage",function(o){r.$snackbar(o,"error")}),_rocketforms.RocketFormEventBus.$on("infoMessage",function(o){r.$snackbar(o,"info")})}};
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.rocketFormSnackbarMixin = undefined;
+
+var _rocketforms = require('./rocketforms');
+
+var rocketFormSnackbarMixin = exports.rocketFormSnackbarMixin = {
+    created: function created() {
+        var _this = this;
+
+        _rocketforms.RocketFormEventBus.$on('errorMessage', function (message) {
+            _this.$snackbar(message, 'error');
+        });
+
+        _rocketforms.RocketFormEventBus.$on('infoMessage', function (message) {
+            _this.$snackbar(message, 'info');
+        });
+    }
+};

@@ -1,1 +1,33 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={methods:{renderBooleanInput:function(e,t,s){var a=this,i=t.options;i.label=t.label,i.name=t.name,i.secondary=!0,i.value=this.formData[t.name],this.processBindings(i,t,s);var r="rw-switch";return t.options.checkbox&&(r="rw-checkbox"),e(r,{props:i,attrs:this.veeValidateAttrs(t),class:this.getSGridClasses(t),directives:[this.veeValidateDirective(t)],on:{input:function(e){a.formData[t.name]=e}}})}}};
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    methods: {
+        renderBooleanInput: function renderBooleanInput(h, def, data) {
+            var _this = this;
+
+            var props = def.options;
+            props.label = def.label;
+            props.name = def.name;
+            props.secondary = true;
+            props.value = this.formData[def.name];
+            this.processBindings(props, def, data);
+            var type = 'rw-switch';
+            if (def.options.checkbox) type = 'rw-checkbox';
+
+            return h(type, {
+                props: props,
+                attrs: this.veeValidateAttrs(def),
+                'class': this.getSGridClasses(def),
+                directives: [this.veeValidateDirective(def)],
+                on: {
+                    input: function input(val) {
+                        _this.formData[def.name] = val;
+                    }
+                }
+            });
+        }
+    }
+};

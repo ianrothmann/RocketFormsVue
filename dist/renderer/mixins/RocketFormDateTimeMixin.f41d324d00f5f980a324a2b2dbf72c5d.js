@@ -1,1 +1,90 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={methods:{renderDateInput:function(e,t,a){var i=this,s=t.options;s.label=t.label,s.name=t.name,s.noMargins=!0,s.menu=!0,s.value=this.formData[t.name],this.addOptionalHint(s,t),this.processBindings(s,t,a);var n=e("rw-date",{props:s,attrs:this.veeValidateAttrs(t),directives:[this.veeValidateDirective(t)],on:{input:function(e){i.formData[t.name]=e}}});return e("div",{class:this.getSGridClasses(t)},[n])},renderTimeInput:function(e,t,a){var i=this,s=t.options;s.label=t.label,s.name=t.name,s.noMargins=!0,s.menu=!0,s.value=this.formData[t.name],this.addOptionalHint(s,t),this.processBindings(s,t,a);var n=e("rw-time",{props:s,attrs:this.veeValidateAttrs(t),directives:[this.veeValidateDirective(t)],on:{input:function(e){i.formData[t.name]=e}}});return e("div",{class:this.getSGridClasses(t)},[n])},renderDateTimeInput:function(e,t,a){var i=this,s=t.options;s.dateLabel=t.dateLabel,s.timeLabel=t.timeLabel,s.name=t.name,s.menu=!0,s.noMargins=!0,s.value=this.formData[t.name],this.addOptionalHint(s,t);var n=this.veeValidateAttrs(t);n["data-vv-as"]=t.dateLabel+"/"+t.timeLabel,this.processBindings(s,t,a);var r=e("rw-datetime",{props:s,attrs:n,style:{margin:0},directives:[this.veeValidateDirective(t)],on:{input:function(e){i.formData[t.name]=e}}});return e("div",{class:this.getSGridClasses(t)},[r])}}};
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    methods: {
+        renderDateInput: function renderDateInput(h, def, data) {
+            var _this = this;
+
+            var props = def.options;
+            props.label = def.label;
+            props.name = def.name;
+            props.noMargins = true;
+            props.menu = true;
+            props.value = this.formData[def.name];
+            this.addOptionalHint(props, def);
+            this.processBindings(props, def, data);
+
+            var el = h('rw-date', {
+                props: props,
+                attrs: this.veeValidateAttrs(def),
+                directives: [this.veeValidateDirective(def)],
+
+                on: {
+                    input: function input(val) {
+                        _this.formData[def.name] = val;
+                    }
+                }
+            });
+
+            return h('div', { 'class': this.getSGridClasses(def) }, [el]);
+        },
+        renderTimeInput: function renderTimeInput(h, def, data) {
+            var _this2 = this;
+
+            var props = def.options;
+            props.label = def.label;
+            props.name = def.name;
+            props.noMargins = true;
+            props.menu = true;
+            props.value = this.formData[def.name];
+            this.addOptionalHint(props, def);
+            this.processBindings(props, def, data);
+            var el = h('rw-time', {
+                props: props,
+                attrs: this.veeValidateAttrs(def),
+                directives: [this.veeValidateDirective(def)],
+                on: {
+                    input: function input(val) {
+                        _this2.formData[def.name] = val;
+                    }
+                }
+            });
+
+            return h('div', { 'class': this.getSGridClasses(def) }, [el]);
+        },
+        renderDateTimeInput: function renderDateTimeInput(h, def, data) {
+            var _this3 = this;
+
+            var props = def.options;
+            props.dateLabel = def.dateLabel;
+            props.timeLabel = def.timeLabel;
+            props.name = def.name;
+            props.menu = true;
+            props.noMargins = true;
+            props.value = this.formData[def.name];
+            this.addOptionalHint(props, def);
+            var attrs = this.veeValidateAttrs(def);
+            attrs['data-vv-as'] = def.dateLabel + '/' + def.timeLabel;
+            this.processBindings(props, def, data);
+
+            var el = h('rw-datetime', {
+                props: props,
+                attrs: attrs,
+                style: {
+                    margin: 0
+                },
+                directives: [this.veeValidateDirective(def)],
+                on: {
+                    input: function input(val) {
+                        _this3.formData[def.name] = val;
+                    }
+                }
+            });
+
+            return h('div', { 'class': this.getSGridClasses(def) }, [el]);
+        }
+    }
+};

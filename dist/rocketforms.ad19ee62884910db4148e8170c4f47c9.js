@@ -1,1 +1,34 @@
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(exports,"__esModule",{value:!0}),exports.RocketFormEventBus=void 0;var _vue=require("vue"),_vue2=_interopRequireDefault(_vue),RocketFormEventBus=exports.RocketFormEventBus=new _vue2.default({data:{currentID:0},methods:{getUniqueID:function(e){return this.currentID++,"rocketform_"+e+this.currentID},errorMessage:function(e){this.$emit("errorMessage",e)}}});_vue2.default.component("rocket-view-edit",require("./RocketViewEdit.vue")),_vue2.default.component("rocket-delete",require("./RocketDelete.vue")),_vue2.default.component("rocket-form",require("./RocketForm.vue")),_vue2.default.component("rocket-view",require("./RocketView.vue")),_vue2.default.component("rocket-form-renderer",require("./renderer/RocketFormRenderer.vue")),_vue2.default.component("rocket-view-renderer",require("./renderer/RocketViewRenderer.vue"));
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.RocketFormEventBus = undefined;
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var RocketFormEventBus = exports.RocketFormEventBus = new _vue2.default({
+    data: {
+        currentID: 0
+    },
+    methods: {
+        getUniqueID: function getUniqueID(prefix) {
+            this.currentID++;
+            return 'rocketform_' + prefix + this.currentID;
+        },
+        errorMessage: function errorMessage(message) {
+            this.$emit('errorMessage', message);
+        }
+    }
+});
+
+_vue2.default.component('rocket-view-edit', require('./RocketViewEdit.vue'));
+_vue2.default.component('rocket-delete', require('./RocketDelete.vue'));
+_vue2.default.component('rocket-form', require('./RocketForm.vue'));
+_vue2.default.component('rocket-view', require('./RocketView.vue'));
+_vue2.default.component('rocket-form-renderer', require('./renderer/RocketFormRenderer.vue'));
+_vue2.default.component('rocket-view-renderer', require('./renderer/RocketViewRenderer.vue'));

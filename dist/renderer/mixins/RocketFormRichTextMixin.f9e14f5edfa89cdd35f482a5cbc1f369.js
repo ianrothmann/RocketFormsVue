@@ -1,1 +1,32 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={methods:{renderRichtextInput:function(e,t,s){var i=this,a=t.options;return a.label=t.label,a.name=t.name,a.value=this.formData[t.name],this.processBindings(a,t,s),e("quill-editor",{props:a,attrs:this.veeValidateAttrs(t),class:this.getSGridClasses(t),directives:[],on:{input:function(e){i.formData[t.name]=e}}})}}};
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    methods: {
+        renderRichtextInput: function renderRichtextInput(h, def, data) {
+            var _this = this;
+
+            var props = def.options;
+            props.label = def.label;
+            props.name = def.name;
+            props.value = this.formData[def.name];
+            this.processBindings(props, def, data);
+
+            return h('quill-editor', {
+                props: props,
+                attrs: this.veeValidateAttrs(def),
+                'class': this.getSGridClasses(def),
+                directives: [
+                    // this.veeValidateDirective(def)
+                ],
+                on: {
+                    input: function input(val) {
+                        _this.formData[def.name] = val;
+                    }
+                }
+            });
+        }
+    }
+};

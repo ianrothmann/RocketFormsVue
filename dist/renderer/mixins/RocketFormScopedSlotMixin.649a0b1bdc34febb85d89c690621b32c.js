@@ -1,1 +1,16 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={methods:{renderScopedSlot:function(e,t,s){var r=this.$scopedSlots[t.name](this.formData);return e("div",{class:this.getSGridClasses(t)},r)}}};
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    methods: {
+        renderScopedSlot: function renderScopedSlot(h, def, data) {
+            var children = this.$scopedSlots[def.name](this.formData);
+
+            return h('div', {
+                'class': this.getSGridClasses(def)
+            }, children);
+        }
+    }
+};
