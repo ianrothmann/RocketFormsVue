@@ -15,12 +15,12 @@ export const RocketFormEventBus = new Vue({
     }
 });
 
-Vue.component('rocket-view-edit', require('./RocketViewEdit.vue'));
-Vue.component('rocket-delete', require('./RocketDelete.vue'));
-Vue.component('rocket-form', require('./RocketForm.vue'));
-Vue.component('rocket-view', require('./RocketView.vue'));
-Vue.component('rocket-form-renderer', require('./renderer/RocketFormRenderer.vue'));
-Vue.component('rocket-view-renderer', require('./renderer/RocketViewRenderer.vue'));
+Vue.component('rocket-view-edit', require('./RocketViewEdit.vue').default);
+Vue.component('rocket-delete', require('./RocketDelete.vue').default);
+Vue.component('rocket-form', require('./RocketForm.vue').default);
+Vue.component('rocket-view', require('./RocketView.vue').default);
+Vue.component('rocket-form-renderer', require('./renderer/RocketFormRenderer.vue').default);
+Vue.component('rocket-view-renderer', require('./renderer/RocketViewRenderer.vue').default);
 
 
 
